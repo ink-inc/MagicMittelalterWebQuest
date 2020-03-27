@@ -1,0 +1,17 @@
+<div *ngIf="auth.user | async as user; else showLogin">
+  <h1>Hello {{ user.displayName }}!</h1>
+  <button (click)="logout()">Logout</button>
+</div>
+<ng-template #showLogin>
+  <p>Please login.</p>
+  <input #mail>
+  <input #password>
+  <button (click)="login(mail.value, password.value)">Login</button>
+  <br>
+  <p>Register instead</p>
+  <br>
+  <input #newMail>
+  <input #newPassword>
+  <input #key>
+  <button (click)="register(newMail.value, newPassword.value, key.value)">Register</button>
+</ng-template>

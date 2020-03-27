@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "webquest-alpha": {
+      "hosting": {
+        "WebQuest": [
+          "webquest-alpha"
+        ]
+      }
+    }
+  }
+}
