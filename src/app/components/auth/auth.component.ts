@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
 import UserCredential = firebase.auth.UserCredential;
 import {AuthService} from '../../services/auth.service';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import 'firebase/firestore';
 
 @Component({
@@ -33,17 +33,20 @@ export class AuthComponent implements OnInit {
     this.authService.logOut();
   }
   register(email, password, key) {
+    let logged = false;
     this.keys.subscribe(keyChain => {
       for (const dataKey of keyChain) {
         if (dataKey.key === key) {
           this.auth.createUserWithEmailAndPassword(email, password).then( res => {
             this.authService.logIn(res);
           });
-          return;
+          logged = true;
         }
       }
     });
-    throw new TypeError('Could not register: wrong register-key');
+    if (!logged) {
+      throw new TypeError('Could not register: wrong register-key');
+    }
   }
 
   ngOnInit(): void {
