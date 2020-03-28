@@ -1,17 +1,20 @@
-declare function require(name: string);
-
 import { Injectable } from '@angular/core';
+import {AngularFirestore} from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class CharacterCreationService {
 
-  constructor() {
-  }
+  fields: any;
 
-  private checkFields(): boolean {
-    const fields: any = document.getElementsByClassName('input');
+  constructor(
+    private afs: AngularFirestore
+  ) {}
+
+  checkFields(fields): boolean {
+    this.fields = fields;
     let failing = false;
     for (const field of fields) {
       if (field.classList.contains('required') && field.value === '') {
@@ -23,10 +26,7 @@ export class CharacterCreationService {
         field.parentElement.classList.remove('error');
       }
     }
-    if (failing) {
-      return false;
-    }
-    return fields;
+    return !failing;
   }
 
   private makeid(length = 16) {
@@ -39,21 +39,16 @@ export class CharacterCreationService {
     return result;
   }
 
-  createCharacter() {
-    const fields: any = this.checkFields();
+  createCharacter(fields) {
+    const charCollection = this.afs.collection('Characters');
     if (!fields) {
       throw new TypeError('Can\'t create character!');
     }
-    let values = {uid: this.makeid()};
+    const values = {uid: this.makeid()};
     for (const field of fields) {
       values[field.name] = field.value;
     }
     console.log(values);
-    const jsonValues = JSON.stringify(values);
-    const fs = require('fs');
-    fs.writeFile('../data/characters/characters.json', jsonValues, err => console.log(err));
-    const characterFile = require('../data/characters/characters.json');
-    characterFile[values.uid] = values;
-    console.log(characterFile);
+    charCollection.add(values);
   }
 }
