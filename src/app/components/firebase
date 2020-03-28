@@ -1,0 +1,12 @@
+M	angular.json
+M	package-lock.json
+M	package.json
+M	src/app/app-routing.module.ts
+M	src/app/app.module.ts
+M	src/app/components/character-creation/character-creation.component.html
+A	src/app/components/overview/overview.component.html
+A	src/app/components/overview/overview.component.scss
+A	src/app/components/overview/overview.component.spec.ts
+A	src/app/components/overview/overview.component.ts
+M	src/app/services/auth.service.ts
+M	src/app/services/character-creation.service.ts
