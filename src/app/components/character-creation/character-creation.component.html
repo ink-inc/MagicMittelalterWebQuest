@@ -1,1 +1,54 @@
-<p>character-creation works!</p>
+<section class="character-creation container" *ngIf="loggedIn; else login">
+  <div class="row">
+    <div class="col-12">
+      <h1>Charaktererstellung</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-sm-6">
+      <label>
+        Vorname
+        <input #forename name="forename" class="required">
+      </label>
+    </div>
+    <div class="col-12 col-sm-6">
+      <label>
+        Nachname
+        <input #surname name="surname" class="required">
+      </label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-sm-6">
+      <label>
+        Alter
+        <input #age name="age">
+      </label>
+    </div>
+    <div class="col-12 col-sm-6">
+      <label>
+        Berufung
+        <input #job name="jobs">
+      </label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-sm-6">
+      <label>
+        Beschreibung Aussehen
+        <textarea #appearance name="appearance"></textarea>
+      </label>
+    </div>
+    <div class="col-12 col-sm-6">
+      <label>
+        Beschreibung Charakter
+        <textarea #characteristics name="characteristics"></textarea>
+      </label>
+    </div>
+  </div>
+  <button (click)="create(forename, surname, age, job, appearance, characteristics)">Erstellen</button>
+</section>
+
+<ng-template #login>
+  <app-auth></app-auth>
+</ng-template>
