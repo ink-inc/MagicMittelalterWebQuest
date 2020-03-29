@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import {AngularFireAuth} from '@angular/fire/auth';
+import {first} from 'rxjs/operators';
+import {User} from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +10,13 @@ export class AuthService {
 
   user: any;
 
-  constructor() { }
+  constructor(
+    private afa: AngularFireAuth
+  ) {
+    this.afa.currentUser.then(user => {
+      return user;
+    }).catch(e => console.log(e));
+  }
 
   logIn(user): void {
     this.user = user;
@@ -17,7 +26,7 @@ export class AuthService {
     delete this.user;
     console.log(this.user);
   }
-  isLoggedIn(): boolean {
-    return this.user;
+  isLoggedIn(): Promise<User | null> {
+    return this.afa.authState.pipe(first()).toPromise();
   }
 }

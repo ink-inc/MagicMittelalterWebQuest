@@ -4,6 +4,7 @@ import UserCredential = firebase.auth.UserCredential;
 import {AuthService} from '../../services/auth.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import 'firebase/firestore';
+import {Character} from '../overview/overview.component';
 
 @Component({
   selector: 'app-auth',
@@ -40,12 +41,14 @@ export class AuthComponent implements OnInit {
           this.auth.createUserWithEmailAndPassword(email, password).then( res => {
             this.authService.logIn(res);
           });
+          this.afs.collection<Character>('Register Keys', ref => ref.where('key', '==', key)).snapshotChanges().subscribe(res => {
+            res[0].payload?.doc.ref.delete();
+          });
           logged = true;
         }
       }
     });
     if (!logged) {
-      throw new TypeError('Could not register: wrong register-key');
     }
   }
 

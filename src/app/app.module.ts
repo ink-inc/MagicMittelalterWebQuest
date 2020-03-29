@@ -7,12 +7,14 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AuthComponent } from './components/auth/auth.component';
 import { CharacterCreationComponent } from './components/character-creation/character-creation.component';
+import { OverviewComponent } from './components/overview/overview.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
-    CharacterCreationComponent
+    CharacterCreationComponent,
+    OverviewComponent
   ],
   imports: [
     BrowserModule,
