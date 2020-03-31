@@ -1,0 +1,41 @@
+<div class="collapsible">
+  <div class="collapsible-header" (click)="toggleBody(collapsibleBody)">
+    <div class="row">
+      <div class="col-7" [innerHTML]="'<h3>' + item.forename + ' ' + item.surname + '</h3>'"></div>
+      <div class="col-5"><p class='uid text-right'>{{item.uid}}</p></div>
+    </div>
+    <div class="row">
+      <div class="col-3" [innerHTML]="'<p>Alter: ' + item.age + '</p>'"></div>
+      <div class="col-9" [innerHTML]="'<p class=\'text-right\'>Jobs: ' + item.jobs + '</p>'"></div>
+    </div>
+  </div>
+  <div class="collapsible-body collapsed" #collapsibleBody>
+    <div class="row">
+      <div class="col-12">
+        <h3>Äußerliches Erscheinungsbild</h3>
+        <p [innerText]="item.appearance">Nicht definiert</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <h3>Charakterliches</h3>
+        <p [innerText]="item.characteristics">Nicht definiert</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <!-- TODO implement editing -->
+        <button class="edit-button" (click)="editItem(item)">
+          <fa-icon [icon]="faEdit"></fa-icon> Bearbeiten
+        </button>
+      </div>
+      <div class="col-6 d-flex justify-content-end">
+        <button class="delete-button" (click)="deleteItem(item.uid, buttonDel)" #buttonDel>
+          <fa-icon [icon]="faTrash"></fa-icon>&nbsp;
+          <span>Löschen</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

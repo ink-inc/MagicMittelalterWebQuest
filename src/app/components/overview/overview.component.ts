@@ -23,12 +23,11 @@ export class OverviewComponent implements OnInit {
   items: Observable<Character[]>;
 
   constructor(private readonly afs: AngularFirestore) {
-    this.itemsCollection = afs.collection<Character>('Characters');
+    this.itemsCollection = afs.collection<Character>('Characters', ref => ref.limit(3));
     this.items = this.itemsCollection.valueChanges();
   }
 
   ngOnInit(): void {
-
   }
 
 }
