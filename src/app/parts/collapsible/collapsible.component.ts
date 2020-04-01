@@ -20,7 +20,9 @@ export class CollapsibleComponent implements OnInit {
   private itemsCollection: AngularFirestoreCollection<Character>;
   char;
 
-  constructor(private readonly afs: AngularFirestore) {
+  constructor(
+    private readonly afs: AngularFirestore,
+  ) {
     this.itemsCollection = afs.collection<Character>('Characters');
   }
 

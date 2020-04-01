@@ -33,7 +33,7 @@ import {faTimes} from '@fortawesome/free-solid-svg-icons/faTimes';
 })
 export class CharacterCreationComponent implements OnInit {
 
-  isHidden = false;
+  isHidden = true;
   closeTimes = faTimes;
 
   constructor(
