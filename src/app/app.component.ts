@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { auth } from 'firebase/app';
-import UserCredential = firebase.auth.UserCredential;
+import {AuthService} from './services/auth.service';
+import { faSignInAlt } from '@fortawesome/free-solid-svg-icons/faSignInAlt';
+import {AngularFireAuth} from '@angular/fire/auth';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +10,17 @@ import UserCredential = firebase.auth.UserCredential;
 })
 export class AppComponent {
 
-  constructor() {
+  loggedIn;
+  signInAlt = faSignInAlt;
+
+  constructor(
+    private auth: AuthService,
+    public fireAuth: AngularFireAuth,
+  ) {
+    this.auth.isLoggedIn().then(res => {
+      this.loggedIn = res;
+    });
+    console.log(this.loggedIn);
   }
 
 }

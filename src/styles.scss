@@ -1,1 +1,98 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import './app/vars';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; color: $text !important; }
+
+input {
+  margin: 0 5px;
+  padding: 6px 10px;
+  border: 1px solid white;
+  border-radius: 3px;
+  align-self: center;
+  color: lightcoral;
+  transition-duration: .3s;
+  &:focus {
+    outline: none;
+  }
+  &::placeholder {
+    color: $accent;
+  }
+  &.background-white {
+    border: 1px solid $accent;
+  }
+}
+textarea {
+  margin: 0 5px;
+  padding: 6px 10px;
+  border: 1px solid white;
+  border-radius: 3px;
+  align-self: center;
+  color: lightcoral;
+  transition-duration: .3s;
+  &:focus {
+    outline: none;
+  }
+  &::placeholder {
+    color: $accent;
+  }
+  &.background-white {
+    border: 1px solid $accent;
+  }
+}
+
+.w-100pc {
+  width: 100% !important;
+}
+
+.btn {
+  height: fit-content;
+  align-self: center;
+  margin: 0 5px;
+  padding: 4px 10px;
+  &.btn-login {
+    border: 1px solid white;
+    background-color: white;
+    color: $accent;
+    &.background-white {
+      border: 1px solid $accent;
+    }
+  }
+  &.btn-register{
+    border: 1px solid white;
+    background-color: $accent;
+    color: white;
+  }
+}
+
+.justify-self-start {
+  justify-self: flex-start;
+}
+.justify-self-end {
+  justify-self: flex-end;
+}
+
+.abs-center-vertical {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.abs-center-horizontal {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.abs-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.abs-center-vx {
+  z-index: 2;
+  position: absolute;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+}

@@ -1,54 +1,35 @@
-<section class="character-creation container" *ngIf="loggedIn; else login">
+<button class="btn btn-login background-white" (click)="toggleCharCreation()">Charakter erstellen</button>
+
+<section class="character-creation abs-center-vx" *ngIf="!isHidden" [@inOutAnimation]>
+  <div class="row">
+    <div class="col-12 d-flex justify-content-between">
+      <h1>Charaktererstellung</h1>
+      <button class="btn btn-close justify-self-end align-self-start" (click)="toggleCharCreation()"><fa-icon [icon]="closeTimes"></fa-icon></button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-sm-6">
+      <input #forename name="forename" class="background-white" placeholder="Vorname">
+    </div>
+    <div class="col-12 col-sm-6">
+      <input #surname name="surname" class="required background-white" placeholder="Nachname">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-sm-6">
+      <input #age name="age" placeholder="Alter" class="background-white">
+    </div>
+    <div class="col-12 col-sm-6">
+      <input #job name="jobs" placeholder="Berufungen" class="background-white">
+    </div>
+  </div>
   <div class="row">
     <div class="col-12">
-      <h1>Charaktererstellung</h1>
+      <textarea #appearance name="appearance" placeholder="Äußerliche Erscheinung" class="background-white"></textarea>
+    </div>
+    <div class="col-12">
+      <textarea #characteristics name="characteristics" placeholder="Charakterliches Verhalten" class="background-white"></textarea>
     </div>
   </div>
-  <div class="row">
-    <div class="col-12 col-sm-6">
-      <label>
-        Vorname
-        <input #forename name="forename" class="required">
-      </label>
-    </div>
-    <div class="col-12 col-sm-6">
-      <label>
-        Nachname
-        <input #surname name="surname" class="required">
-      </label>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-12 col-sm-6">
-      <label>
-        Alter
-        <input #age name="age">
-      </label>
-    </div>
-    <div class="col-12 col-sm-6">
-      <label>
-        Berufung
-        <input #job name="jobs">
-      </label>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-12 col-sm-6">
-      <label>
-        Beschreibung Aussehen
-        <textarea #appearance name="appearance"></textarea>
-      </label>
-    </div>
-    <div class="col-12 col-sm-6">
-      <label>
-        Beschreibung Charakter
-        <textarea #characteristics name="characteristics"></textarea>
-      </label>
-    </div>
-  </div>
-  <button (click)="create(forename, surname, age, job, appearance, characteristics)">Erstellen</button>
+  <button class="btn btn-register" (click)="create(forename, surname, age, job, appearance, characteristics)">Erstellen</button>
 </section>
-
-<ng-template #login>
-  <app-auth></app-auth>
-</ng-template>

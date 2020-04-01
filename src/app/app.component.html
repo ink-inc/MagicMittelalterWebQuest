@@ -1,1 +1,9 @@
-<router-outlet></router-outlet>
+<div class="spacer">&nbsp;</div>
+<div class="container">
+  <router-outlet *ngIf="fireAuth.user | async"></router-outlet>
+</div>
+<app-navbar></app-navbar>
+<div *ngIf="!(fireAuth.user | async)" class="login-info abs-center text-center">
+  <fa-icon [icon]="signInAlt"></fa-icon>
+  <p class="">Bitte einloggen um<br>Daten einsehen zu können</p>
+</div>

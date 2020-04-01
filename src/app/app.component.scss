@@ -1,0 +1,17 @@
+@import "vars";
+
+.spacer {
+  height: calc(3rem + 2px + 20px);
+}
+.login-info {
+  z-index: -1;
+  opacity: .3;
+  fa-icon {
+    padding: 30px;
+    font-size: 50px;
+  }
+  p {
+    font-size: 30px;
+    line-height: 35px;
+  }
+}
