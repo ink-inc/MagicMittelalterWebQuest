@@ -13,7 +13,7 @@ import 'firebase/firestore';
 export class CollapsibleComponent implements OnInit {
 
   @Input() item;
-  ref: any;
+
   faEdit = faEdit;
   faTrash = faTrash;
   confirmDelete = false;

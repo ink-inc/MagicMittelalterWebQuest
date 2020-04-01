@@ -1,35 +1,5 @@
 @import '../../vars';
 
-input {
-  margin: 0 5px;
-  padding: 6px 10px;
-  border: none;
-  border-radius: 3px;
-  align-self: center;
-  color: lightcoral;
-  transition-duration: .3s;
-  &:focus {
-    outline: none;
-  }
-  &::placeholder {
-    color: $accent;
-  }
-}
-.btn {
-  align-self: center;
-  margin: 0 5px;
-  padding: 4px 10px;
-  &.btn-login {
-    border: 1px solid white;
-    background-color: white;
-    color: $accent;
-  }
-  &.btn-register{
-    border: 1px solid white;
-    background-color: $accent;
-    color: white;
-  }
-}
 .register {
   z-index: 10;
   position: absolute;

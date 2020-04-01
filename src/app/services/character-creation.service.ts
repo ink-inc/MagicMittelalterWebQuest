@@ -14,16 +14,15 @@ export class CharacterCreationService {
   ) {}
 
   checkFields(fields): boolean {
+    console.log(fields);
     this.fields = fields;
     let failing = false;
     for (const field of fields) {
       if (field.classList.contains('required') && field.value === '') {
         field.classList.add('error');
-        field.parentElement.classList.add('error');
         failing = true;
       } else {
         field.classList.remove('error');
-        field.parentElement.classList.remove('error');
       }
     }
     return !failing;
