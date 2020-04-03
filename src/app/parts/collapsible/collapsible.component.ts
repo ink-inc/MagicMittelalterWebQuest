@@ -29,7 +29,6 @@ export class CollapsibleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.item);
   }
 
   toggleBody(el) {
