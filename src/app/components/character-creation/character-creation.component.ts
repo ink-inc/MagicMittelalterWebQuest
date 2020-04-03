@@ -3,6 +3,16 @@ import {CharacterCreationService} from '../../services/character-creation.servic
 import {animate, style, transition, trigger} from '@angular/animations';
 import {faTimes} from '@fortawesome/free-solid-svg-icons/faTimes';
 
+export interface DialogueStateDataType {
+  forename?: string;
+  surname?: string;
+  age?: string;
+  jobs?: string;
+  appearance?: string;
+  characteristics?: string;
+  uid?: string;
+}
+
 @Component({
   selector: 'app-character-creation',
   templateUrl: './character-creation.component.html',
@@ -31,17 +41,22 @@ import {faTimes} from '@fortawesome/free-solid-svg-icons/faTimes';
     )
   ]
 })
+
 export class CharacterCreationComponent implements OnInit {
 
-  isHidden = true;
+  isVisible = false;
+  charCreationData: DialogueStateDataType;
   closeTimes = faTimes;
 
   constructor(
-    private charCreation: CharacterCreationService
-  ) {
-  }
+    public charCreation: CharacterCreationService
+  ) { }
 
   ngOnInit(): void {
+    this.charCreation.characterDialogueState.subscribe(state => {
+      this.isVisible = state.state;
+      this.charCreationData = state.data;
+    });
   }
 
   create(...fields) {
@@ -55,7 +70,10 @@ export class CharacterCreationComponent implements OnInit {
     this.charCreation.createCharacter(arr);
   }
 
-  toggleCharCreation() {
-    this.isHidden = !this.isHidden;
+  edit(uid, ...fields) {
+    if (!this.charCreation.checkFields(fields)) {
+      return;
+    }
+    this.charCreation.editCharacter(uid, fields);
   }
 }

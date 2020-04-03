@@ -4,6 +4,7 @@ import {faTrash} from '@fortawesome/free-solid-svg-icons/faTrash';
 import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
 import {Character} from '../../components/overview/overview.component';
 import 'firebase/firestore';
+import {CharacterCreationService} from '../../services/character-creation.service';
 
 @Component({
   selector: 'app-collapsible',
@@ -22,11 +23,13 @@ export class CollapsibleComponent implements OnInit {
 
   constructor(
     private readonly afs: AngularFirestore,
+    private charCreationService: CharacterCreationService
   ) {
     this.itemsCollection = afs.collection<Character>('Characters');
   }
 
   ngOnInit(): void {
+    console.log(this.item);
   }
 
   toggleBody(el) {
@@ -40,20 +43,12 @@ export class CollapsibleComponent implements OnInit {
   }
 
   editItem(item) {
-    return this.afs.collection<Character>('Characters', el => el.where('uid', '==', item.uid))
-      .snapshotChanges();
+    this.charCreationService.toggleCharacterDialogue(item);
   }
 
   deleteItem(uid: string, buttonRef) {
     if (this.confirmDelete) {
-      this.char = this.afs.collection<Character>('Characters', ref => ref.where('uid', '==', uid))
-        .snapshotChanges()
-        .subscribe(res => {
-        if (res.length > 1) {
-          throw new Error('Could not determine unique character. UIDs colliding!');
-        }
-        res[0].payload?.doc.ref.delete();
-      });
+      this.charCreationService.deleteCharacter(uid);
       return;
     }
     buttonRef.classList.add('confirm');
