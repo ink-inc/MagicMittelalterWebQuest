@@ -4,7 +4,7 @@ import UserCredential = firebase.auth.UserCredential;
 import {AuthService} from '../../services/auth.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import 'firebase/firestore';
-import {Character} from '../overview/overview.component';
+import {Character} from '../character-list/character-list.component';
 import {animate, style, transition, trigger} from '@angular/animations';
 import {error} from 'selenium-webdriver';
 

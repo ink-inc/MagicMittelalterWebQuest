@@ -2,14 +2,15 @@ import {Component, Input, OnInit} from '@angular/core';
 import {faEdit} from '@fortawesome/free-regular-svg-icons/faEdit';
 import {faTrash} from '@fortawesome/free-solid-svg-icons/faTrash';
 import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
-import {Character} from '../../components/overview/overview.component';
 import 'firebase/firestore';
 import {CharacterCreationService} from '../../services/character-creation.service';
+import {Character} from '../../components/character-list/character-list.component';
+import {animate, query, stagger, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-collapsible',
   templateUrl: './collapsible.component.html',
-  styleUrls: ['./collapsible.component.scss']
+  styleUrls: ['./collapsible.component.scss'],
 })
 export class CollapsibleComponent implements OnInit {
 

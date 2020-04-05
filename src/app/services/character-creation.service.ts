@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {BehaviorSubject} from 'rxjs';
-import {Character} from '../components/overview/overview.component';
+import {Character} from '../components/character-list/character-list.component';
 
 export interface DialogueStateType {
   state: boolean;
