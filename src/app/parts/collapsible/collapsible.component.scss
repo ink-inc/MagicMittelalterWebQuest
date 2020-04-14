@@ -21,6 +21,26 @@
       font-weight: bolder;
       opacity: 0.4;
     }
+    .avatar {
+      height: 100px;
+      width: 100px;
+      object-fit: cover;
+      padding: 20px;
+      border: 1px solid $accent;
+      border-radius: 3px;
+      opacity: .3;
+      transition-duration: .3s;
+      margin-right: 20px;
+      &.loaded {
+        padding: 0;
+        opacity: 1;
+        border: 1px solid transparent;
+      }
+      &.failed {
+        padding: 40px;
+        border-color: $text;
+      }
+    }
   }
   .collapsible-body {
     padding: 10px 10px 10px;

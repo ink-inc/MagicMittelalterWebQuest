@@ -20,7 +20,6 @@ export class AppComponent {
     this.auth.isLoggedIn().then(res => {
       this.loggedIn = res;
     });
-    console.log(this.loggedIn);
   }
 
 }

@@ -1,0 +1,79 @@
+<section id="creation-corner">
+  <div class="spacer"></div>
+  <form enctype="multipart/form-data">
+    <div class="row">
+      <div class="col-12 d-flex justify-content-between">
+        <h1>Charaktererstellung</h1>
+      </div>
+    </div>
+    <div class="row">
+      <input type="file"
+             alt="Profilbild"
+             accept=".png,.jpg,.jpeg"
+             hidden #uploadDialogue
+             (change)="fileUploadHandling($event.target.files)">
+      <div class="col-12 d-flex justify-content-center">
+        <div class="profile-pic-upload d-flex">
+          <div class="icon-wrapper" (click)="clickUpload(uploadDialogue)">
+            <fa-icon [icon]="fileImage" class="profile-pic"></fa-icon>
+          </div>
+          <div class="profile-pic-info">
+            <h4>Bildinformationen</h4>
+            <p><b>Name:</b> {{fileName}}</p>
+            <p><b>Größe:</b> {{fileSize}}</p>
+            <p><b>Niceness:</b> 100%</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <input #forename name="forename"
+               class="background-white"
+               placeholder="Vorname"
+               [value]="charCreationData?.forename ? charCreationData.forename : ''">
+      </div>
+      <div class="col-12">
+        <input #surname name="surname"
+               class="required background-white"
+               placeholder="Nachname"
+               [value]="charCreationData?.surname ? charCreationData.surname : ''">
+      </div>
+      <div class="col-12">
+        <input #age name="age"
+               placeholder="Alter"
+               class="background-white"
+               [value]="charCreationData?.age ? charCreationData.age : ''">
+      </div>
+      <div class="col-12">
+        <input #job name="jobs"
+               placeholder="Berufungen"
+               class="background-white"
+               [value]="charCreationData?.jobs ? charCreationData.jobs : ''">
+      </div>
+      <div class="col-12">
+        <textarea #appearance name="appearance"
+                  placeholder="Äußerliche Erscheinung"
+                  class="background-white"
+                  [value]="charCreationData?.appearance ? charCreationData.appearance : ''"></textarea>
+      </div>
+      <div class="col-12">
+        <textarea #characteristics
+                  name="characteristics"
+                  placeholder="Charakterliches Verhalten"
+                  class="background-white"
+                  [value]="charCreationData?.characteristics ? charCreationData.characteristics : ''"></textarea>
+      </div>
+      <div class="col-12">
+        <button *ngIf="charCreationData"
+                class="btn btn-register"
+                (click)="edit($event, charCreationData.uid, forename, surname, age, job, appearance, characteristics)">
+          Abschließen
+        </button>
+        <button *ngIf="!charCreationData"
+                class="btn btn-register"
+                (click)="create($event, forename, surname, age, job, appearance, characteristics)">
+          Erstellen
+        </button>
+      </div>
+    </div>
+  </form>
+</section>

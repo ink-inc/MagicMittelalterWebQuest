@@ -2,10 +2,13 @@ import { Injectable } from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {BehaviorSubject} from 'rxjs';
 import {Character} from '../components/character-list/character-list.component';
+import {AngularFireStorage} from '@angular/fire/storage';
+import {$PERCENT} from 'codelyzer/angular/styles/chars';
 
 export interface DialogueStateType {
   state: boolean;
   data: {
+    hasImage?: boolean;
     forename?: string;
     surname?: string;
     age?: string;
@@ -27,7 +30,8 @@ export class CharacterCreationService {
   characterDialogueState = new BehaviorSubject<DialogueStateType>({state: this.characterDialogueOpen, data: undefined});
 
   constructor(
-    private afs: AngularFirestore
+    private afs: AngularFirestore,
+    private afsg: AngularFireStorage
   ) {}
 
   checkFields(fields): boolean {
@@ -81,18 +85,26 @@ export class CharacterCreationService {
         if (res.length > 1) {
           throw new Error('Could not determine unique character. UIDs colliding!');
         }
-        res[0].payload?.doc.ref.delete();
+        if (res.length !== 0) {
+          res[0].payload?.doc.ref.delete();
+        }
       });
+    this.afsg.ref(uid).delete();
   }
 
-  createCharacter(fields) {
+  createCharacter(profilePic, fields) {
     if (!fields) {
-      throw new TypeError('Can\'t create character!');
+      throw new TypeError('Can\'t create character, unsufficient fields.');
     }
     const charCollection = this.afs.collection('Characters');
     const values = {uid: this.makeid()};
     for (const field of fields) {
       values[field.name] = field.value;
+    }
+    if (profilePic) {
+      this.afsg.upload(values.uid, profilePic);
+      // @ts-ignore
+      values.hasImage = true;
     }
     charCollection.add(values);
   }

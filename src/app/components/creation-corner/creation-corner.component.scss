@@ -1,0 +1,57 @@
+@import "../../vars";
+
+#creation-corner {
+  z-index: 1;
+  position: fixed;
+  right: 0;
+  top: 70px;
+  width: 45vw;
+  height: calc(100vh - 70px);
+  padding: 20px;
+  background-color: rgb(240,240,240);
+}
+input, textarea {
+  width: 100%;
+  margin-bottom: 20px;
+  transition-duration: .3s;
+  &.error {
+    background-color: $accent;
+    color: white;
+    &::placeholder {
+      color: white;
+    }
+  }
+}
+.profile-pic-upload {
+  margin-bottom: 20px;
+  border: 1px solid $accent;
+  border-radius: 3px;
+  background-color: white;
+  color: $accent;
+  transition-duration: .3s;
+  .icon-wrapper {
+    padding: 50px;
+  }
+  .profile-pic {
+    font-size: 20px;
+  }
+  .profile-pic-info {
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    padding: 5px 20px;
+    overflow: hidden;
+    h4 {
+      margin: 0 0 5px 0;
+      padding: 0;
+    }
+    p {
+      margin: 2px 0;
+      padding: 0;
+    }
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}

@@ -2,7 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
 import 'firebase/firestore';
-import {animate, query, stagger, style, transition, trigger} from '@angular/animations';
 
 export interface Character {
   uid: string;
@@ -24,6 +23,7 @@ export class CharacterListComponent implements OnInit {
 
   private itemsCollection: AngularFirestoreCollection<Character>;
   items: Observable<Character[]>;
+  shown = true;
 
   constructor(private readonly afs: AngularFirestore) {
   }
@@ -33,4 +33,7 @@ export class CharacterListComponent implements OnInit {
     this.items = this.itemsCollection.valueChanges();
   }
 
+  check() {
+    console.log('checked');
+  }
 }

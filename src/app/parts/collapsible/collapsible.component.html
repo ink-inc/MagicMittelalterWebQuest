@@ -1,12 +1,19 @@
 <div class="collapsible">
-  <div class="collapsible-header" (click)="toggleBody(collapsibleBody)">
-    <div class="row">
-      <div class="col-7" [innerHTML]="'<h3>' + item.forename + ' ' + item.surname + '</h3>'"></div>
-      <div class="col-5"><p class='uid text-right'>{{item.uid}}</p></div>
-    </div>
-    <div class="row">
-      <div class="col-3" [innerHTML]="'<p>Alter: ' + item.age + '</p>'"></div>
-      <div class="col-9" [innerHTML]="'<p class=\'text-right\'>Jobs: ' + item.jobs + '</p>'"></div>
+  <div class="collapsible-header d-flex w-100" (click)="toggleBody(collapsibleBody)">
+    <img [id]="'avatar-' + item.uid"
+         class="avatar"
+         [src]="avatar"
+         alt="img"
+         [ngClass]="{'loaded': imageState === 'loaded', 'failed': imageState === 'failed'}">
+    <div class="w-100 p-1">
+      <div class="row">
+        <div class="col-7" [innerHTML]="'<h3>' + item.forename + ' ' + item.surname + '</h3>'"></div>
+        <div class="col-5"><p class='uid text-right'>{{item.uid}}</p></div>
+      </div>
+      <div class="row">
+        <div class="col-3" [innerHTML]="'<p>Alter: ' + item.age + '</p>'"></div>
+        <div class="col-9" [innerHTML]="'<p class=\'text-right\'>Jobs: ' + item.jobs + '</p>'"></div>
+      </div>
     </div>
   </div>
   <div class="collapsible-body collapsed" #collapsibleBody>
@@ -24,7 +31,6 @@
     </div>
     <div class="row">
       <div class="col-6">
-        <!-- TODO implement editing -->
         <button class="edit-button" (click)="editItem(item)">
           <fa-icon [icon]="faEdit"></fa-icon> Bearbeiten
         </button>
