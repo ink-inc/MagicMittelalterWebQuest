@@ -1,30 +1,65 @@
 <div class="collapsible">
-  <div class="collapsible-header" (click)="toggleBody(collapsibleBody)">
-    <div class="row">
-      <div class="col-7" [innerHTML]="'<h3>' + item.forename + ' ' + item.surname + '</h3>'"></div>
-      <div class="col-5"><p class='uid text-right'>{{item.uid}}</p></div>
-    </div>
-    <div class="row">
-      <div class="col-3" [innerHTML]="'<p>Alter: ' + item.age + '</p>'"></div>
-      <div class="col-9" [innerHTML]="'<p class=\'text-right\'>Jobs: ' + item.jobs + '</p>'"></div>
+  <div class="collapsible-header d-flex w-100" (click)="toggleBody(collapsibleBody)">
+    <img class="avatar"
+         [src]="avatar"
+         alt="img"
+         [ngClass]="{'loaded': imageState === 'loaded', 'failed': imageState === 'failed'}">
+    <div class="w-100 p-1">
+      <div class="row">
+        <div class="col-7" [innerHTML]="'<h3>' + item.forename + ' ' + item.surname + '</h3>'"></div>
+        <div class="col-5"><p class='uid text-right'>{{item.uid}}</p></div>
+      </div>
+      <div class="row">
+        <div class="col-3" [innerHTML]="'<p>Alter: ' + 'Soon' + '</p>'"></div>
+        <div class="col-9" [innerHTML]="'<p class=\'text-right\'>Jobs: ' + item.jobs + '</p>'"></div>
+      </div>
     </div>
   </div>
   <div class="collapsible-body collapsed" #collapsibleBody>
     <div class="row">
-      <div class="col-12">
-        <h3>Äußerliches Erscheinungsbild</h3>
-        <p [innerText]="item.appearance">Nicht definiert</p>
+      <div class="col-4" *ngIf="item.birthDay">
+        <h3>Geburtstag</h3>
+        <p>{{item.birthDay}}</p>
+      </div>
+      <div class="col-4" *ngIf="item.birthMonth">
+        <h3>Geburtsmonat</h3>
+        <p>{{item.birthMonth}}</p>
+      </div>
+      <div class="col-4" *ngIf="item.birthYear">
+        <h3>Geburtsjahr</h3>
+        <p>{{item.birthYear}}</p>
       </div>
     </div>
     <div class="row">
-      <div class="col-12">
+      <div class="col-4" *ngIf="item.deathDay">
+        <h3>Todestag</h3>
+        <p>{{item.deathDay}}</p>
+      </div>
+      <div class="col-4" *ngIf="item.deathMonth">
+        <h3>Todesmonat</h3>
+        <p>{{item.deathMonth}}</p>
+      </div>
+      <div class="col-4" *ngIf="item.deathYear">
+        <h3>Todesjahr</h3>
+        <p>{{item.deathYear}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12" *ngIf="item.appearance">
+        <h3>Äußerliches Erscheinungsbild</h3>
+        <p [innerText]="item.appearance"></p>
+      </div>
+      <div class="col-12" *ngIf="item.characteristics">
         <h3>Charakterliches</h3>
-        <p [innerText]="item.characteristics">Nicht definiert</p>
+        <p [innerText]="item.characteristics"></p>
+      </div>
+      <div class="col-12" *ngIf="item.additionalInfo">
+        <h3>Weitere Informationen</h3>
+        <p [innerText]="item.additionalInfo"></p>
       </div>
     </div>
     <div class="row">
       <div class="col-6">
-        <!-- TODO implement editing -->
         <button class="edit-button" (click)="editItem(item)">
           <fa-icon [icon]="faEdit"></fa-icon> Bearbeiten
         </button>

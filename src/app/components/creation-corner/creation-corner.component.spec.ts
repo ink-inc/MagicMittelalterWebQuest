@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CharacterCreationComponent } from './character-creation.component';
+import { CreationCornerComponent } from './creation-corner.component';
 
-describe('CharacterCreationComponent', () => {
-  let component: CharacterCreationComponent;
-  let fixture: ComponentFixture<CharacterCreationComponent>;
+describe('CreationCornerComponent', () => {
+  let component: CreationCornerComponent;
+  let fixture: ComponentFixture<CreationCornerComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CharacterCreationComponent ]
+      declarations: [ CreationCornerComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CharacterCreationComponent);
+    fixture = TestBed.createComponent(CreationCornerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

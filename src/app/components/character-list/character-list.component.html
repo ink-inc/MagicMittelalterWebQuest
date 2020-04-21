@@ -1,0 +1,8 @@
+<div *ngIf="shown">
+  <div *ngFor="let item of items | async" class="character-wrapper">
+    <div>
+      <app-collapsible [item]="item" (change)="check()"></app-collapsible>
+    </div>
+  </div>
+</div>
+<app-creation-corner></app-creation-corner>

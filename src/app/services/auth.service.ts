@@ -20,11 +20,9 @@ export class AuthService {
 
   logIn(user): void {
     this.user = user;
-    console.log(this.user);
   }
   logOut(): void {
     delete this.user;
-    console.log(this.user);
   }
   isLoggedIn(): Promise<User | null> {
     return this.afa.authState.pipe(first()).toPromise();
