@@ -1,17 +1,24 @@
 import {Component, OnInit} from '@angular/core';
 import {CharacterCreationService} from '../../services/character-creation.service';
-import {faFileImage} from '@fortawesome/free-solid-svg-icons/faFileImage';
-import {AngularFireStorage} from '@angular/fire/storage';
 import 'firebase/storage';
 import * as prettyBytes from 'pretty-bytes';
+
+import {faTimes} from '@fortawesome/free-solid-svg-icons/faTimes';
+import {faFileImage} from '@fortawesome/free-solid-svg-icons/faFileImage';
 
 export interface DialogueStateDataType {
   forename?: string;
   surname?: string;
-  age?: string;
+  birthYear?: string;
+  birthMonth?: string;
+  birthDay?: string;
+  deathYear?: string;
+  deathMonth?: string;
+  deathDay?: string;
   jobs?: string;
   appearance?: string;
   characteristics?: string;
+  additionalInfo?: string;
   uid?: string;
 }
 
@@ -22,12 +29,14 @@ export interface DialogueStateDataType {
 })
 export class CreationCornerComponent implements OnInit {
 
-  isVisible = false;
+  faTimes = faTimes;
+
   charCreationData: DialogueStateDataType;
   fileImage = faFileImage;
   fileName = 'Kein Bild ausgewählt';
   fileSize = '0';
 
+  avatar = '';
   profilePic: File;
 
   constructor(
@@ -37,8 +46,8 @@ export class CreationCornerComponent implements OnInit {
 
   ngOnInit(): void {
     this.charCreation.characterDialogueState.subscribe(state => {
-      this.isVisible = state.state;
       this.charCreationData = state.data;
+      this.avatar = state.avatar;
     });
   }
 
@@ -59,6 +68,9 @@ export class CreationCornerComponent implements OnInit {
     if (!this.charCreation.checkFields(fields)) {
       return;
     }
+    if (!!this.profilePic) {
+      this.charCreation.editCharacter(uid, fields, this.profilePic);
+    }
     this.charCreation.editCharacter(uid, fields);
   }
 
@@ -70,6 +82,11 @@ export class CreationCornerComponent implements OnInit {
     this.profilePic = input.item(0);
     this.fileName = this.profilePic.name;
     this.fileSize = prettyBytes(this.profilePic.size);
+  }
+
+  endCharacterEditing() {
+    this.charCreationData = undefined;
+    this.avatar = '';
   }
 
 }

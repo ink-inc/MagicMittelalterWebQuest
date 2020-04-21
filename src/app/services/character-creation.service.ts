@@ -7,6 +7,7 @@ import {$PERCENT} from 'codelyzer/angular/styles/chars';
 
 export interface DialogueStateType {
   state: boolean;
+  avatar: string;
   data: {
     hasImage?: boolean;
     forename?: string;
@@ -27,7 +28,7 @@ export class CharacterCreationService {
 
   fields: any;
   characterDialogueOpen = false;
-  characterDialogueState = new BehaviorSubject<DialogueStateType>({state: this.characterDialogueOpen, data: undefined});
+  characterDialogueState = new BehaviorSubject<DialogueStateType>({state: this.characterDialogueOpen, avatar: undefined, data: undefined});
 
   constructor(
     private afs: AngularFirestore,
@@ -58,13 +59,14 @@ export class CharacterCreationService {
     return result;
   }
 
-  toggleCharacterDialogue(data?: object) {
-    this.characterDialogueState.next({ state: !this.characterDialogueOpen, data });
+  toggleCharacterDialogue(avatarUrl?, data?: object) {
+    console.log(avatarUrl);
+    this.characterDialogueState.next({ state: !this.characterDialogueOpen, avatar: avatarUrl, data });
     this.characterDialogueOpen = !this.characterDialogueOpen;
   }
 
-  editCharacter(uid, fields) {
-    this.afs.collection<Character>('Characters', ref => ref.where('uid', '==', uid))
+  async editCharacter(uid, fields, newAvatar?) {
+    await this.afs.collection<Character>('Characters', ref => ref.where('uid', '==', uid))
       .snapshotChanges()
       .subscribe(res => {
         if (res.length > 1) {
@@ -73,6 +75,11 @@ export class CharacterCreationService {
         const values = {};
         for (const field of fields) {
           values[field.name] = field.value;
+        }
+        if (!!newAvatar) {
+          this.afsg.upload(uid, newAvatar);
+          // @ts-ignore
+          values.hasImage = true;
         }
         res[0].payload?.doc.ref.update(values).then();
       });

@@ -1,2 +1,10 @@
 $accent:lightcoral;
 $text: #555;
+
+.color-accent {
+  color: $accent;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}

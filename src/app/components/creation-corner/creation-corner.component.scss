@@ -23,7 +23,6 @@ input, textarea {
   }
 }
 .profile-pic-upload {
-  margin-bottom: 20px;
   border: 1px solid $accent;
   border-radius: 3px;
   background-color: white;
@@ -54,4 +53,15 @@ input, textarea {
   &:hover {
     cursor: pointer;
   }
+}
+
+.avatar {
+  align-self: center;
+  height: 120px;
+  width: 120px;
+  object-fit: cover;
+  border: 1px solid $accent;
+  border-radius: 3px;
+  transition-duration: .3s;
+  margin-right: 20px;
 }

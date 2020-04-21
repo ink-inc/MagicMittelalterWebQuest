@@ -2,17 +2,23 @@
   <div class="spacer"></div>
   <form enctype="multipart/form-data">
     <div class="row">
-      <div class="col-12 d-flex justify-content-between">
-        <h1>Charaktererstellung</h1>
+      <div class="col-12 d-flex">
+        <h1>{{!charCreationData ? 'Charaktererstellung' : 'Charakterbearbeitung'}}</h1>
+        <p class="align-self-center color-accent cursor-pointer ml-2"
+           *ngIf="charCreationData"
+           (click)="endCharacterEditing()">Zurück zur Charaktererstellung</p>
       </div>
     </div>
     <div class="row">
+
       <input type="file"
              alt="Profilbild"
              accept=".png,.jpg,.jpeg"
              hidden #uploadDialogue
              (change)="fileUploadHandling($event.target.files)">
-      <div class="col-12 d-flex justify-content-center">
+
+      <div class="col-12 d-flex justify-content-center mb-4">
+        <img class="avatar" [src]="avatar" *ngIf="avatar" alt="Kein Bild\ngesetzt">
         <div class="profile-pic-upload d-flex">
           <div class="icon-wrapper" (click)="clickUpload(uploadDialogue)">
             <fa-icon [icon]="fileImage" class="profile-pic"></fa-icon>
@@ -33,16 +39,48 @@
       </div>
       <div class="col-12">
         <input #surname name="surname"
-               class="required background-white"
+               class="background-white"
                placeholder="Nachname"
                [value]="charCreationData?.surname ? charCreationData.surname : ''">
       </div>
-      <div class="col-12">
-        <input #age name="age"
-               placeholder="Alter"
+      <div class="col-4">
+      <input #birthYear name="birthYear"
+             placeholder="Geburtsjahr (N.T.)"
+             class="background-white"
+             [value]="charCreationData?.birthYear ? charCreationData.birthYear : ''">
+    </div>
+      <div class="col-4">
+        <input #birthMonth name="birthMonth"
+               placeholder="Geburtsmonat"
                class="background-white"
-               [value]="charCreationData?.age ? charCreationData.age : ''">
+               [value]="charCreationData?.birthMonth ? charCreationData.birthMonth : ''">
       </div>
+      <div class="col-4">
+        <input #birthDay name="birthDay"
+               placeholder="Geburtstag"
+               class="background-white"
+               [value]="charCreationData?.birthDay ? charCreationData.birthDay : ''">
+      </div>
+      <div class="col-4">
+        <input #deathYear name="deathYear"
+               placeholder="Todesjahr (N.T.)"
+               class="background-white"
+               [value]="charCreationData?.deathYear ? charCreationData.deathYear : ''">
+      </div>
+      <div class="col-4">
+        <input #deathMonth name="deathMonth"
+               placeholder="Todesmonat"
+               class="background-white"
+               [value]="charCreationData?.deathMonth ? charCreationData.deathMonth : ''">
+      </div>
+      <div class="col-4">
+        <input #deathDay name="deathDay"
+               placeholder="Todestag"
+               class="background-white"
+               [value]="charCreationData?.deathDay ? charCreationData.deathDay : ''">
+      </div>
+      <div class="col-4"></div>
+      <div class="col-4"></div>
       <div class="col-12">
         <input #job name="jobs"
                placeholder="Berufungen"
@@ -63,14 +101,21 @@
                   [value]="charCreationData?.characteristics ? charCreationData.characteristics : ''"></textarea>
       </div>
       <div class="col-12">
+        <textarea #additionalInfo
+                  name="additionalInfo"
+                  placeholder="Zusätzliche Informationen"
+                  class="background-white"
+                  [value]="charCreationData?.additionalInfo ? charCreationData.additionalInfo : ''"></textarea>
+      </div>
+      <div class="col-12">
         <button *ngIf="charCreationData"
                 class="btn btn-register"
-                (click)="edit($event, charCreationData.uid, forename, surname, age, job, appearance, characteristics)">
+                (click)="edit($event, charCreationData.uid, forename, surname, birthYear, birthMonth, birthDay, deathYear, deathMonth, deathDay, job, appearance, characteristics, additionalInfo)">
           Abschließen
         </button>
         <button *ngIf="!charCreationData"
                 class="btn btn-register"
-                (click)="create($event, forename, surname, age, job, appearance, characteristics)">
+                (click)="create($event, forename, surname, birthYear, birthMonth, birthDay, deathYear, deathMonth, deathDay, job, appearance, characteristics, additionalInfo)">
           Erstellen
         </button>
       </div>

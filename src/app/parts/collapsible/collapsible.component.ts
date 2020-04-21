@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, AfterViewInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {faEdit} from '@fortawesome/free-regular-svg-icons/faEdit';
 import {faTrash} from '@fortawesome/free-solid-svg-icons/faTrash';
 import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
@@ -12,7 +12,7 @@ import {AngularFireStorage} from '@angular/fire/storage';
   templateUrl: './collapsible.component.html',
   styleUrls: ['./collapsible.component.scss'],
 })
-export class CollapsibleComponent implements OnInit, AfterViewInit {
+export class CollapsibleComponent implements OnInit {
 
   @Input() item;
 
@@ -23,6 +23,7 @@ export class CollapsibleComponent implements OnInit, AfterViewInit {
   char;
   avatar = '/assets/loader.gif';
   imageState = 'loading';
+  // TODO shove the loading-thingy into it's own component
 
   constructor(
     private readonly afs: AngularFirestore,
@@ -30,13 +31,9 @@ export class CollapsibleComponent implements OnInit, AfterViewInit {
     private charCreationService: CharacterCreationService
   ) {
     this.itemsCollection = afs.collection<Character>('Characters');
-
   }
 
   ngOnInit(): void {
-  }
-
-  ngAfterViewInit(): void {
     if (this.item.hasImage) {
       this.afsg.ref(this.item.uid).getDownloadURL().subscribe(
         res => {
@@ -65,7 +62,8 @@ export class CollapsibleComponent implements OnInit, AfterViewInit {
   }
 
   editItem(item) {
-    this.charCreationService.toggleCharacterDialogue(item);
+    console.log(this.avatar);
+    this.charCreationService.toggleCharacterDialogue(this.avatar, item);
   }
 
   deleteItem(uid: string, buttonRef) {
